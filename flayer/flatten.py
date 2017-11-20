@@ -24,7 +24,7 @@ class WeghtData(object):
   def _set_owner_layer(self, _owner_layer):
     """Sets this weight matrix owner layer
       Args:
-        _owner_layer - owner layer of weights
+        _owner_layer - weight matrix owner layer
     """
     self._owner_layer = _owner_layer
     
@@ -51,7 +51,7 @@ class WeightParameter(Parameter):
   def _set_owner_layer(self, _owner_layer):
     """Sets this weights owner layer
       Args:
-        _owner_layer - owner layer of weights
+        _owner_layer - weight matrix owner layer
     """
     
     self._weight_data = WeghtData()
