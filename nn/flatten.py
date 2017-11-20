@@ -84,6 +84,8 @@ class Flatten(nn.Linear):
     self.reset_parameters()
     
   def reset_parameters(self):
+    """Initializes weights and biases 
+      if weight matrix is set"""
     
     if self.weight is not None:
       stdv = 1. / math.sqrt(self.weight.size(1))
