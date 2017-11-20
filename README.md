@@ -56,15 +56,13 @@ nn.Sequential(nn.Conv2d(1, 10, kernel_size=5),
               nn.Linear(50, 10))   
 ```
 
-No additional manipulation is needed on tensors after convolutional layer for passing it to Flatten layer
+No additional manipulation is needed ```python x = x.view(x.size(0), 320)``` on tensors after convolutional layer for passing it to Flatten layer
 
 ```python
-
-
-    x = F.relu(F.max_pool2d(self.conv1(x), 2))
-    x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
-    x = self.flatten(x)
-    x = F.relu(x)
+x = F.relu(F.max_pool2d(self.conv1(x), 2))
+x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
+x = self.flatten(x)
+x = F.relu(x)
 ```
     
 
