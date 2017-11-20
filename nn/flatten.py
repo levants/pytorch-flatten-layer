@@ -63,7 +63,7 @@ class WeightParameter(Parameter):
 
 
 class Flatten(nn.Linear):
-  """Flatten layer"""
+  """Flatten layer for PyTorch"""
   
   def __init__(self, out_features, in_features=None, bias=True):
     super(nn.Linear, self).__init__()
