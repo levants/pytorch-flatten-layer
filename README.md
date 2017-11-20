@@ -1,6 +1,6 @@
 # README #
 
-Flatten layer for PyTorch
+Flatten layer for PyTorch framework
 
 # Get it!
 =========

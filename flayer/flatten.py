@@ -33,7 +33,7 @@ class WeghtData(object):
       Args:
         src - source tensor
         async - flag to copy asynchronous
-        broadcast - flag tu broadcast
+        broadcast - flag for broadcasting
     """
     if src is None:
       super(Parameter, self).copy_(src, async=async, broadcast=broadcast)
