@@ -16,6 +16,5 @@ setup(name='pytorch-flatten-layer',
       author='Levan Tsinadze',
       author_email='levantsinadze@gmail.com',
       url='https://github.com/levants/pytorch-flatten-layer/',
-      packages=['flayer'],
-     )
+      packages=['flayer'])
 

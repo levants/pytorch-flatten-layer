@@ -109,7 +109,8 @@ class Flatten(nn.Linear):
     return self
 
   def _apply_postfactum(self):
-    """Applies functions from module"""
+    """Applies functions from module 
+      after weight initialization"""
     
     for fn in self._apply_fns:
       super(nn.Linear, self)._apply(fn)
