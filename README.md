@@ -53,7 +53,7 @@ nn.Sequential(nn.Conv2d(1, 10, kernel_size=5),
               nn.ReLU(),
               nn.Dropout2d(),
               Flatten(50),
-              nn.Linear(50, 10))   
+              nn.Linear(50, 10))
 ```
 
 No additional manipulation like ```x = x.view(x.size(0), 320)``` is needed on tensors after convolutional 
