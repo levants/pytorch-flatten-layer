@@ -5,8 +5,9 @@ Flatten layer for PyTorch framework
 # Get it!
 =========
 
+Install it with PyPI dyrectly from github repository
 ```shell
-pip install pytorch-flatten-layer
+pip install git+git://github.com/levants/pytorch-flatten-layer.git
 ```
 
 # Use it!

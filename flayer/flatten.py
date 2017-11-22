@@ -35,6 +35,7 @@ class WeghtData(object):
         async - flag to copy asynchronous
         broadcast - flag for broadcasting
     """
+    
     if src is None:
       super(Parameter, self).copy_(src, async=async, broadcast=broadcast)
     else:

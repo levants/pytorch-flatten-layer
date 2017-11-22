@@ -5,7 +5,6 @@ Setup script for PyTorch flatten layer
 
 @author: Levan Tsinadze
 """
-
 #!/usr/bin/env python
 
 from distutils.core import setup
