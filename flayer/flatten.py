@@ -22,9 +22,9 @@ import torch.nn.functional as F
 class WeghtData(object):
   
   def _set_owner_layer(self, _owner_layer):
-    """Sets this weight matrix owner layer
+    """Sets owner layer of this weight matrix
       Args:
-        _owner_layer - weight matrix owner layer
+        _owner_layer - owner layer of weight matrix
     """
     self._owner_layer = _owner_layer
     
@@ -50,9 +50,9 @@ class WeightParameter(Parameter):
     return super(WeightParameter, cls).__new__(cls, data, requires_grad=requires_grad)
   
   def _set_owner_layer(self, _owner_layer):
-    """Sets this weights owner layer
+    """Sets owner layer of this weights
       Args:
-        _owner_layer - weight matrix owner layer
+        _owner_layer - owner layer of weight matrix
     """
     
     self._weight_data = WeghtData()

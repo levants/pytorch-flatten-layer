@@ -10,7 +10,7 @@ Setup script for PyTorch flatten layer
 from distutils.core import setup
 
 setup(name='pytorch-flatten-layer',
-      version='1.0',
+      version='0.0.1',
       description='Flatten layer for PyTorch framework',
       author='Levan Tsinadze',
       author_email='levantsinadze@gmail.com',
