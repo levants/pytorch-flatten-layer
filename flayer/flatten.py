@@ -35,13 +35,26 @@ class Vectorizer(nn.Module):
   def __init__(self):
     super(Vectorizer, self).__init__()
     self.total_dim = None
+    
+  def _calculate_total_dim(self, x):
+    """Calculates total dimension of tensor
+      Args:
+       x = input tensor
+      Returns:
+        calculated dimension
+    """
+    
+    if self.total_dim is None:
+      self.total_dim = _calculate_dim(x)
+    
+    return self.total_dim
   
   def forward(self, input_tensor):
     
-    if self.total_dim is None:
-      self.total_dim = _calculate_dim(input_tensor)
+    vector_dim = self._calculate_total_dim(input_tensor)
+    x = input_tensor.view(input_tensor.size(0), vector_dim)
     
-    return self.total_dim
+    return x
 
 
 class WeghtData(object):
