@@ -57,7 +57,7 @@ nn.Sequential(nn.Conv2d(1, 10, kernel_size=5),
               nn.Linear(50, 10))
 ```
 
-No additional manipulation like ```x = x.view(x.size(0), 320)``` is needed on tensors after convolutional 
+No additional manipulation like ```python x = x.view(x.size(0), 320)``` is needed on tensors after convolutional 
 layer for passing it to Flatten layer
 
 ```python
@@ -66,6 +66,28 @@ x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
 x = self.flatten(x)
 x = F.relu(x)
 ```
+
+For only vectorization of tensor better use ```python Vectorizer``` class (better initialize it once 
+and use this instance in your model)
+
+```python
+from nn.flatten import Vectorizer
+...
+class Net(nn.Module):
+  """Network model with flatten layer
+   for character recognition"""
+  
+  def __init__(self):
+    super(Net, self).__init__()
+    self.vectorizer = Vectorizer
+    ...
+
+  def forward(self, x):
+  ...
+  x = self.flatten(x)
+  ...
+```
+   
 
 Enjoy :)
     

@@ -19,6 +19,31 @@ import numpy as np
 import torch.nn.functional as F
 
 
+def _calculate_dim(x):
+  """Calculates total dimension for input tensor
+    Args:
+      x - input tensor
+    Returns:
+      total dimension
+  """
+  return 0 if x is None else np.prod(x.size()[1:])
+
+
+class Vectorizer(nn.Module):
+  """Flattens input tensor"""
+  
+  def __init__(self):
+    super(Vectorizer, self).__init__()
+    self.total_dim = None
+  
+  def forward(self, input_tensor):
+    
+    if self.total_dim is None:
+      self.total_dim = _calculate_dim(input_tensor)
+    
+    return self.total_dim
+
+
 class WeghtData(object):
   
   def _set_owner_layer(self, _owner_layer):
@@ -144,7 +169,7 @@ class Flatten(nn.Linear):
     """
     
     if self.weight is None:
-      total_dim = 0 if x is None else np.prod(x.size()[1:])
+      total_dim = _calculate_dim(x)
       self.set_total_dim(total_dim)
 
   def forward(self, input_tensor):
