@@ -12,10 +12,10 @@ from __future__ import print_function
 import unittest
 
 from flayer.flatten import (Vectorizer, Flatten)
-from torch import nn
+from flayer.tests.test_models import Net
 import torch
 from torch.autograd import Variable
-
+from torch import nn
 import torch.nn.functional as F
 
 
@@ -50,8 +50,10 @@ class TestFlattenAndVectorization(unittest.TestCase):
   def setUp(self):
     self.vec_tensor = Variable(torch.randn(1, 1, 28, 28))
     self.flt_tensor = Variable(torch.randn(1, 32, 7, 7))
+    self.lbl_tensor = Variable(torch.randn(1, 10))
     self.vectorizer = Vectorizer()
     self.flatten = Flatten(50)
+    self.net = Net()
   
   def test_vectorization(self):
     """Test "Vectorizer" layer"""
@@ -71,4 +73,11 @@ class TestFlattenAndVectorization(unittest.TestCase):
     print("Flatten - x.size()", x.size())
     self.assertEqual(x.size(1), 50, 'Size does not match after Flatten layer')
   
+  def test_network(self):
+    """Test "Flatten" layer"""
 
+    x = self.vec_tensor
+    x = self.net(x)
+    
+    print("Flatten - x.size()", x.size())
+    self.assertEqual(x.size(1), 10, 'Size does not match after network model')

@@ -19,7 +19,7 @@ import numpy as np
 import torch.nn.functional as F
 
 
-def _calculate_dim(x):
+def _calculate_flat_dim(x):
   """Calculates total dimension for input tensor
     Args:
       x - input tensor
@@ -45,7 +45,7 @@ class Vectorizer(nn.Module):
     """
     
     if self.total_dim is None:
-      self.total_dim = _calculate_dim(x)
+      self.total_dim = _calculate_flat_dim(x)
     
     return self.total_dim
   
@@ -59,13 +59,9 @@ class Vectorizer(nn.Module):
 
 class WeghtData(object):
   
-  def _set_owner_layer(self, _owner_layer):
-    """Sets owner layer of this weight matrix
-      Args:
-        _owner_layer - owner layer of weight matrix
-    """
+  def __init__(self, _owner_layer):
     self._owner_layer = _owner_layer
-    
+  
   def copy_(self, src, async=False, broadcast=True):
     """Copies the elements from source into this tensor
       Args:
@@ -91,10 +87,11 @@ class WeightParameter(Parameter):
     """Sets owner layer of this weights
       Args:
         _owner_layer - owner layer of weight matrix
+      Returns:
+        current instance
     """
-    
-    self._weight_data = WeghtData()
-    self._weight_data._set_owner_layer(_owner_layer)  
+    self._weight_data = WeghtData(_owner_layer)
+    return self
 
   @property
   def data(self):
@@ -109,13 +106,14 @@ class Flatten(nn.Linear):
     self.in_features = in_features
     self.out_features = out_features
     self._apply_fns = []
+    # Initialize weights
     if in_features is None:
       self.weight = None
-      weight_parameter = WeightParameter()
-      weight_parameter._set_owner_layer(self)
+      weight_parameter = WeightParameter()._set_owner_layer(self)
       self.register_parameter('weight', weight_parameter)
     else:
       self.weight = Parameter(torch.Tensor(out_features, in_features))
+    # Initialize bias
     if bias:
       self.bias = Parameter(torch.Tensor(out_features))
     else:
@@ -182,7 +180,7 @@ class Flatten(nn.Linear):
     """
     
     if self.weight is None:
-      total_dim = _calculate_dim(x)
+      total_dim = _calculate_flat_dim(x)
       self.set_total_dim(total_dim)
 
   def forward(self, input_tensor):
