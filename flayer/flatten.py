@@ -90,6 +90,7 @@ class WeightParameter(Parameter):
       Returns:
         current instance
     """
+    
     self._weight_data = WeghtData(_owner_layer)
     return self
 

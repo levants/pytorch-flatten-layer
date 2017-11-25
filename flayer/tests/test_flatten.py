@@ -12,10 +12,10 @@ from __future__ import print_function
 import unittest
 
 from flayer.flatten import (Vectorizer, Flatten)
-from flayer.tests.test_models import Net
+from torch import nn
 import torch
 from torch.autograd import Variable
-from torch import nn
+
 import torch.nn.functional as F
 
 
