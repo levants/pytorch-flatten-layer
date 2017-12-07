@@ -18,6 +18,7 @@ from torch.nn.parameter import Parameter
 import numpy as np
 import torch.nn.functional as F
 
+_WEIGHT_KEY = 'weight'
 
 def _calculate_flat_dim(x):
   """Calculates total dimension for input tensor
@@ -111,7 +112,7 @@ class Flatten(nn.Linear):
     if in_features is None:
       self.weight = None
       weight_parameter = WeightParameter()._set_owner_layer(self)
-      self.register_parameter('weight', weight_parameter)
+      self.register_parameter(_WEIGHT_KEY, weight_parameter)
     else:
       self.weight = Parameter(torch.Tensor(out_features, in_features))
     # Initialize bias
@@ -153,6 +154,18 @@ class Flatten(nn.Linear):
     for fn in self._apply_fns:
       super(nn.Linear, self)._apply(fn)
       
+  def register_parameter(self, name, param):
+    """Removes and registers weight parameters
+      Args:
+        name - parameter name
+        param - parameter value
+    """
+    
+    if name == _WEIGHT_KEY:
+      self._parameters[name] = param
+    else:
+      super(Flatten, self).register_parameter(name, param)
+      
   def _set_input_dim(self, total_dim):
     """Sets total dimension of input
       Args:
@@ -161,7 +174,7 @@ class Flatten(nn.Linear):
     
     self.in_features = total_dim
     self.weight = Parameter(torch.Tensor(self.out_features, self.in_features))
-    self.register_parameter('weight', self.weight)
+    self.register_parameter(_WEIGHT_KEY, self.weight)
     self.reset_parameters()
     self._apply_postfactum()   
           
