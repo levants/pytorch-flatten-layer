@@ -20,6 +20,7 @@ import torch.nn.functional as F
 
 _WEIGHT_KEY = 'weight'
 
+
 def _calculate_flat_dim(x):
   """Calculates total dimension for input tensor
     Args:
