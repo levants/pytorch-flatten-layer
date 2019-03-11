@@ -20,8 +20,7 @@ from flayer.flatten import (Vectorizer, Flatten)
 
 
 class Net(nn.Module):
-    """Network model with flatten layer
-     for character recognition"""
+    """Network model with flatten layer for character recognition"""
 
     def __init__(self):
         super(Net, self).__init__()
